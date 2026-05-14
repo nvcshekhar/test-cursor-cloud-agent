@@ -3,30 +3,195 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Todo</title>
+    <title>Focus — a quiet todo list</title>
+    <meta
+      name="description"
+      content="A quiet place to think about what's next."
+    />
+    <meta name="color-scheme" content="light dark" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main class="app">
-      <h1>Todos</h1>
+    <a class="skip-link" href="#new-todo-input">Skip to input</a>
 
-      <form id="new-todo-form" class="new-todo">
+    <main class="app" aria-labelledby="app-title">
+      <header class="app__header">
+        <h1 id="app-title" class="app__title">Focus</h1>
+        <p class="app__tagline">A quiet place to think about what's next.</p>
+      </header>
+
+      <form id="new-todo-form" class="composer" autocomplete="off">
+        <label class="sr-only" for="new-todo-input">New todo</label>
         <input
           id="new-todo-input"
+          class="composer__input"
           type="text"
           name="title"
-          placeholder="What needs to be done?"
-          autocomplete="off"
-          required
+          placeholder="What's next?  (press / to focus)"
+          maxlength="500"
+          aria-describedby="composer-hint"
         />
-        <button type="submit">Add</button>
+        <button
+          class="composer__submit"
+          type="submit"
+          aria-label="Add todo"
+        >
+          Add
+        </button>
+        <span id="composer-hint" class="sr-only">
+          Press Enter to add. Press slash to focus this input from anywhere.
+        </span>
       </form>
 
-      <ul id="todo-list" class="todo-list"></ul>
+      <nav
+        class="filters"
+        aria-label="Filter todos"
+        id="filters"
+      >
+        <button
+          class="filters__tab"
+          type="button"
+          role="tab"
+          data-filter="all"
+          aria-selected="true"
+        >
+          All <span class="filters__count" data-count="all">0</span>
+        </button>
+        <button
+          class="filters__tab"
+          type="button"
+          role="tab"
+          data-filter="active"
+          aria-selected="false"
+        >
+          Active <span class="filters__count" data-count="active">0</span>
+        </button>
+        <button
+          class="filters__tab"
+          type="button"
+          role="tab"
+          data-filter="completed"
+          aria-selected="false"
+        >
+          Completed <span class="filters__count" data-count="completed">0</span>
+        </button>
+      </nav>
 
-      <p id="empty-state" class="empty-state" hidden>No todos yet. Add one above.</p>
+      <section
+        id="list-region"
+        class="list-region"
+        aria-live="polite"
+        aria-busy="false"
+      >
+        <ul
+          id="todo-list"
+          class="todo-list"
+          role="listbox"
+          aria-label="Todos"
+          tabindex="-1"
+        ></ul>
+
+        <div id="loading-state" class="state state--loading" hidden>
+          <span class="spinner" aria-hidden="true"></span>
+          <p>Loading your list…</p>
+        </div>
+
+        <div id="error-state" class="state state--error" hidden role="alert">
+          <p class="state__message">Couldn't load todos.</p>
+          <button
+            id="retry-button"
+            class="state__retry"
+            type="button"
+          >
+            Try again
+          </button>
+        </div>
+
+        <div id="empty-state" class="state state--empty" hidden>
+          <p class="state__message" id="empty-message">
+            Nothing here yet.
+          </p>
+        </div>
+      </section>
+
+      <footer class="app__footer" aria-label="Keyboard shortcuts">
+        <details class="shortcuts">
+          <summary>Keyboard shortcuts</summary>
+          <dl class="shortcuts__list">
+            <div><dt><kbd>/</kbd></dt><dd>Focus new todo</dd></div>
+            <div><dt><kbd>Esc</kbd></dt><dd>Blur input / cancel edit</dd></div>
+            <div><dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Navigate items</dd></div>
+            <div><dt><kbd>Space</kbd></dt><dd>Toggle complete</dd></div>
+            <div><dt><kbd>Enter</kbd></dt><dd>Edit focused item</dd></div>
+            <div><dt><kbd>Del</kbd> / <kbd>⌫</kbd></dt><dd>Delete (with undo)</dd></div>
+          </dl>
+        </details>
+      </footer>
     </main>
 
-    <script src="/app.js"></script>
+    <div
+      id="toast"
+      class="toast"
+      role="status"
+      aria-live="polite"
+      hidden
+    >
+      <span class="toast__message" id="toast-message"></span>
+      <button
+        class="toast__action"
+        id="toast-action"
+        type="button"
+        hidden
+      >
+        Undo
+      </button>
+    </div>
+
+    <template id="todo-item-template">
+      <li class="todo" role="option" tabindex="-1" aria-selected="false">
+        <button
+          class="todo__check"
+          type="button"
+          role="checkbox"
+          aria-checked="false"
+          aria-label="Toggle completed"
+        >
+          <svg
+            class="todo__check-icon"
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M3.5 8.5l3 3 6-7"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <span class="todo__title" tabindex="-1"></span>
+        <button
+          class="todo__delete"
+          type="button"
+          aria-label="Delete todo"
+          title="Delete"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path
+              d="M4 4l8 8M12 4l-8 8"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </li>
+    </template>
+
+    <script src="/app.js" defer></script>
   </body>
 </html>
