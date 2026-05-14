@@ -47,6 +47,13 @@ app.patch('/api/todos/:id', (req, res) => {
   res.json(updated);
 });
 
+// Additive bulk endpoint used by the Power-user UI's "Clear completed" button.
+// Removes all completed todos in a single request and returns the remaining list.
+app.post('/api/todos/clear-completed', (req, res) => {
+  const { removed, remaining } = store.clearCompleted();
+  res.json({ removed, todos: remaining });
+});
+
 app.delete('/api/todos/:id', (req, res) => {
   const ok = store.deleteTodo(req.params.id);
   if (!ok) return res.status(404).json({ error: 'Todo not found' });
