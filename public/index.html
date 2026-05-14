@@ -3,28 +3,83 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Todo</title>
+    <title>Todo — Get stuff done and smile a little</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main class="app">
-      <h1>Todos</h1>
+    <canvas id="confetti" aria-hidden="true"></canvas>
 
-      <form id="new-todo-form" class="new-todo">
+    <main class="app" aria-labelledby="app-title">
+      <header class="app__header">
+        <div class="app__title-row">
+          <span class="app__emoji" aria-hidden="true">✨</span>
+          <h1 id="app-title">Todos</h1>
+        </div>
+        <p class="app__tagline">Get stuff done and smile a little.</p>
+      </header>
+
+      <form id="new-todo-form" class="new-todo" autocomplete="off">
+        <label class="visually-hidden" for="new-todo-input">New todo</label>
         <input
           id="new-todo-input"
           type="text"
           name="title"
-          placeholder="What needs to be done?"
+          placeholder="What's next on your list?"
           autocomplete="off"
           required
         />
-        <button type="submit">Add</button>
+        <button type="submit" class="btn btn--primary" aria-label="Add todo">
+          <span class="btn__label">Add</span>
+        </button>
       </form>
 
-      <ul id="todo-list" class="todo-list"></ul>
+      <div
+        id="error-banner"
+        class="error-banner"
+        role="alert"
+        aria-live="polite"
+        hidden
+      ></div>
 
-      <p id="empty-state" class="empty-state" hidden>No todos yet. Add one above.</p>
+      <ul
+        id="todo-list"
+        class="todo-list"
+        aria-label="Your todos. Drag, or use the up and down buttons, to reorder."
+      ></ul>
+
+      <p id="empty-state" class="empty-state" hidden>
+        <span class="empty-state__emoji" aria-hidden="true">🌱</span>
+        Nothing here yet. Plant your first todo above!
+      </p>
+
+      <section
+        id="celebration"
+        class="celebration"
+        aria-live="polite"
+        hidden
+      >
+        <svg
+          class="celebration__mascot"
+          viewBox="0 0 120 120"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <circle class="mascot__face" cx="60" cy="60" r="48" />
+          <circle class="mascot__cheek mascot__cheek--l" cx="38" cy="72" r="6" />
+          <circle class="mascot__cheek mascot__cheek--r" cx="82" cy="72" r="6" />
+          <circle class="mascot__eye mascot__eye--l" cx="44" cy="54" r="4" />
+          <circle class="mascot__eye mascot__eye--r" cx="76" cy="54" r="4" />
+          <path
+            class="mascot__smile"
+            d="M42 72 Q60 90 78 72"
+            fill="none"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+        </svg>
+        <h2 class="celebration__title">All done!</h2>
+        <p class="celebration__subtitle">You're cleared out — go enjoy yourself.</p>
+      </section>
     </main>
 
     <script src="/app.js"></script>
