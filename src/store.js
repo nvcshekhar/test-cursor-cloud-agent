@@ -79,10 +79,19 @@ function deleteTodo(id) {
   return true;
 }
 
+function clearCompleted() {
+  const todos = readAll();
+  const remaining = todos.filter((t) => !t.completed);
+  const removed = todos.length - remaining.length;
+  if (removed > 0) writeAll(remaining);
+  return { removed, remaining };
+}
+
 module.exports = {
   listTodos,
   getTodo,
   createTodo,
   updateTodo,
   deleteTodo,
+  clearCompleted,
 };
