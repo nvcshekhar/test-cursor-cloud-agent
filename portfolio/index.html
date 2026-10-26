@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Builder — Personal Showcase &amp; Gallery</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-badge" aria-hidden="true">✦</span>
+        <span class="brand-title">Portfolio Studio</span>
+      </div>
+      <nav class="header-nav" aria-label="Section navigation">
+        <a href="#intro-section" class="nav-link">About</a>
+        <a href="#gallery-section" class="nav-link">Gallery</a>
+        <a href="#links-section" class="nav-link">Links</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" id="theme-toggle" class="btn btn-ghost" aria-label="Toggle color theme" title="Toggle light/dark theme">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span class="btn-label">Theme</span>
+        </button>
+        <button type="button" id="edit-toggle" class="btn btn-secondary" aria-expanded="true" aria-controls="editor-panel">
+          <span aria-hidden="true">✎</span>
+          <span class="btn-label">Customize</span>
+        </button>
+        <button type="button" id="reset-portfolio" class="btn btn-outline-danger" title="Restore sample portfolio data">
+          <span aria-hidden="true">↺</span>
+          <span class="btn-label">Reset</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace-layout">
+    <main class="portfolio-preview" id="portfolio-preview">
+      <!-- 1. Intro / Hero Section -->
+      <section id="intro-section" class="section hero-section" aria-labelledby="display-name">
+        <div class="hero-card">
+          <div class="avatar-wrapper">
+            <img
+              id="display-avatar"
+              class="hero-avatar"
+              src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='160' height='160' rx='80' fill='url(%23g)'/%3E%3Ccircle cx='80' cy='62' r='26' fill='%23ffffff' fill-opacity='0.9'/%3E%3Cpath d='M36 136c8-24 28-36 44-36s36 12 44 36' fill='%23ffffff' fill-opacity='0.9'/%3E%3C/svg%3E"
+              alt="Profile avatar"
+            />
+            <span class="status-dot" title="Available for projects" aria-hidden="true"></span>
+          </div>
+          <div class="hero-content">
+            <p class="hero-eyebrow">Personal Portfolio</p>
+            <h1 id="display-name" class="hero-name">Alex Rivera</h1>
+            <p id="display-tagline" class="hero-tagline">Creative Technologist &amp; Visual Designer</p>
+            <p id="display-bio" class="hero-bio">
+              Crafting thoughtful digital interfaces, interactive web experiences, and visual stories. Passionate about design systems, open-source tools, and photography.
+            </p>
+            <div class="hero-cta-row">
+              <a href="#gallery-section" class="btn btn-primary">Explore Gallery</a>
+              <a href="#links-section" class="btn btn-ghost">Connect &amp; Links</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Picture Gallery Section -->
+      <section id="gallery-section" class="section gallery-section" aria-labelledby="gallery-heading">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Visual Showcase</p>
+            <h2 id="gallery-heading" class="section-title">Picture Gallery</h2>
+          </div>
+          <p class="section-subtitle">Click any image to inspect in full-screen lightbox view.</p>
+        </div>
+
+        <div id="gallery-grid" class="gallery-grid" aria-live="polite">
+          <!-- Default static preview cards; replaced dynamically by app.js -->
+          <article class="gallery-card">
+            <div class="gallery-card-media">
+              <img
+                src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234f46e5'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='600' height='400' fill='url(%23g1)'/%3E%3Ccircle cx='460' cy='110' r='55' fill='%23fff' fill-opacity='0.25'/%3E%3Cpath d='M0 320 L180 190 L330 290 L460 200 L600 300 L600 400 L0 400 Z' fill='%230f172a' fill-opacity='0.35'/%3E%3C/svg%3E"
+                alt="Geometric Horizon Concept"
+                loading="lazy"
+              />
+            </div>
+            <div class="gallery-card-body">
+              <p class="gallery-card-caption">Geometric Horizon Concept</p>
+              <button type="button" class="btn-icon card-delete-btn" data-remove-photo="sample-1" aria-label="Remove photo" title="Remove photo">&times;</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. Links & Socials Section -->
+      <section id="links-section" class="section links-section" aria-labelledby="links-heading">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Directory &amp; Profiles</p>
+            <h2 id="links-heading" class="section-title">Featured Links &amp; Socials</h2>
+          </div>
+          <p class="section-subtitle">Projects, articles, social profiles, and ways to get in touch.</p>
+        </div>
+
+        <div id="links-list" class="links-list" aria-live="polite">
+          <!-- Default static preview card; replaced dynamically by app.js -->
+          <div class="link-card">
+            <div class="link-card-main">
+              <span class="link-badge" data-category="Project">Project</span>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="link-card-anchor">
+                <span class="link-card-title">Open Source Design System</span>
+                <span class="link-card-url">https://github.com</span>
+              </a>
+            </div>
+            <div class="link-card-actions">
+              <span class="link-arrow" aria-hidden="true">↗</span>
+              <button type="button" class="btn-icon card-delete-btn" data-remove-link="sample-link-1" aria-label="Remove link" title="Remove link">&times;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Interactive Editor Panel / Drawer -->
+    <aside id="editor-panel" class="editor-panel" aria-label="Portfolio Editor">
+      <div class="editor-panel-inner">
+        <div class="editor-header">
+          <h2 class="editor-title">Portfolio Editor</h2>
+          <p class="editor-description">Changes update the preview live and save automatically in your browser.</p>
+        </div>
+
+        <!-- Form 1: Intro / Hero -->
+        <form id="intro-form" class="editor-form" autocomplete="off">
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">1. Personal Introduction</legend>
+
+            <div class="form-group">
+              <label for="input-name" class="form-label">Full Name</label>
+              <input
+                type="text"
+                id="input-name"
+                name="name"
+                class="form-input"
+                placeholder="e.g., Alex Rivera"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="input-tagline" class="form-label">Role / Headline</label>
+              <input
+                type="text"
+                id="input-tagline"
+                name="tagline"
+                class="form-input"
+                placeholder="e.g., Creative Technologist &amp; Visual Designer"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="input-bio" class="form-label">Biography</label>
+              <textarea
+                id="input-bio"
+                name="bio"
+                class="form-textarea"
+                rows="4"
+                placeholder="Tell visitors about your work, background, and interests..."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="input-avatar" class="form-label">Avatar Image URL</label>
+              <input
+                type="url"
+                id="input-avatar"
+                name="avatarUrl"
+                class="form-input"
+                placeholder="https://example.com/avatar.jpg"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="input-avatar-file" class="form-label">Or Upload Avatar Image</label>
+              <input
+                type="file"
+                id="input-avatar-file"
+                name="avatarFile"
+                class="form-file"
+                accept="image/*"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Save Introduction</button>
+          </fieldset>
+        </form>
+
+        <!-- Form 2: Add Picture to Gallery -->
+        <form id="photo-form" class="editor-form" autocomplete="off">
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">2. Add Gallery Picture</legend>
+
+            <div class="form-group">
+              <label for="input-photo-url" class="form-label">Picture URL</label>
+              <input
+                type="url"
+                id="input-photo-url"
+                name="photoUrl"
+                class="form-input"
+                placeholder="https://images.unsplash.com/..."
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="input-photo-file" class="form-label">Or Upload Picture File</label>
+              <input
+                type="file"
+                id="input-photo-file"
+                name="photoFile"
+                class="form-file"
+                accept="image/*"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="input-photo-caption" class="form-label">Caption / Title</label>
+              <input
+                type="text"
+                id="input-photo-caption"
+                name="photoCaption"
+                class="form-input"
+                placeholder="e.g., Sunset over the Pacific"
+                required
+              />
+            </div>
+
+            <button type="submit" id="add-photo-btn" class="btn btn-primary btn-block">Add to Gallery</button>
+          </fieldset>
+        </form>
+
+        <!-- Form 3: Add Link / Social -->
+        <form id="link-form" class="editor-form" autocomplete="off">
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">3. Add Link or Social</legend>
+
+            <div class="form-group">
+              <label for="input-link-title" class="form-label">Link Title</label>
+              <input
+                type="text"
+                id="input-link-title"
+                name="linkTitle"
+                class="form-input"
+                placeholder="e.g., GitHub, Personal Blog"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="input-link-url" class="form-label">Destination URL</label>
+              <input
+                type="url"
+                id="input-link-url"
+                name="linkUrl"
+                class="form-input"
+                placeholder="https://github.com/username"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="input-link-category" class="form-label">Category</label>
+              <select id="input-link-category" name="linkCategory" class="form-select">
+                <option value="Social">Social</option>
+                <option value="Project">Project</option>
+                <option value="Article">Article</option>
+                <option value="Contact">Contact</option>
+              </select>
+            </div>
+
+            <button type="submit" id="add-link-btn" class="btn btn-primary btn-block">Add Link</button>
+          </fieldset>
+        </form>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" hidden>
+    <div class="lightbox-backdrop" data-close-lightbox="true"></div>
+    <div class="lightbox-content">
+      <button type="button" id="lightbox-close" class="lightbox-close" aria-label="Close lightbox">&times;</button>
+      <figure class="lightbox-figure">
+        <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+        <figcaption id="lightbox-caption" class="lightbox-caption"></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>Built with HTML5, CSS3 &amp; Vanilla JavaScript • Interactive Portfolio Builder</p>
+  </footer>
+</body>
+</html>
